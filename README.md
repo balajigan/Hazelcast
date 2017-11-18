@@ -1,14 +1,13 @@
 # Hazelcast
 ## Installing and starting Hazelcast
 
-### lets's install maven
+git clone https://github.com/balajigan/Hazelcast.git
 
-sudo apt-get update
+cd Hazelcast/HzServer
 
-sudo apt-get install -y maven
+mvn package
 
-### Create a maven project
+java -jar target/HzServer-*.jar &
 
-mkdir /opt/hazelcast
-cd /opt/hazelcast
+# Server will be started
 
