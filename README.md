@@ -9,5 +9,6 @@ mvn package
 
 java -jar target/HzServer-*.jar &
 
-# Server will be started
+### Server will be started and listening at port 5701. REST Api is also enabled
+
 
