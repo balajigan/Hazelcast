@@ -5,7 +5,7 @@
 
 package com.batria;
 
-import com.hacelcast.core.MapStore;
+import com.hazelcast.core.MapStore;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
