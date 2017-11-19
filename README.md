@@ -16,6 +16,6 @@ java -jar target/HzServer-1.0.0.jar &
 
 
 ## For adding data into Hazelcast Map. 
-curl -v -X POST -H "Content-Type: text/plain" -d "testUserId" http://<IP>:5701/hazelcast/rest/maps/userMap/userId001
+curl -v -X POST -H "Content-Type: text/plain" -d "testUserId" http://IP_ADDRESS:5701/hazelcast/rest/maps/userMap/userId001
 
-curl -X GET http://<IP>:5701/hazelcast/rest/maps/userMap/userId001
+curl -X GET http://IP_ADDRESS:5701/hazelcast/rest/maps/userMap/userId001
