@@ -11,5 +11,12 @@
   <properties>
       <property name="hazelcast.rest.enabled">true</property>   
   </properties>
-  
+  <map name="default">
+      <map-store enabled="true" initial-mode="LAZY">
+        <class-name>com.batria.UserMapStoreImpl</class-name>
+        <write-delay-seconds>5</write-delay-seconds>
+        <write-batch-size>2</write-batch-size>
+        <write-coalescing>true</write-coalescing>
+      </map-store>
+  </map>	
 </hazelcast>
