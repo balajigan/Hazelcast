@@ -18,26 +18,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class UserMapStoreImpl implements MapStore<String, String>
+public class UserMapStoreImpl implements MapStore<String, Object>
 {
 	
         public static Cluster cluster;
         public static Session session;	
 	public UserMapStoreImpl()
 	{
-		cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-		session = cluster.connect("Test Cluster");
+		//cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
+		//session = cluster.connect("Test Cluster");
+		System.out.println("Constructor called...");
 	}	
 	public synchronized void delete(String key)
 	{
 
 	}
-	public synchronized void store(String key, String value)
+	public synchronized void store(String key, Object obj)
 	{
-
+                System.out.println("Store is called $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 	}
-	public synchronized void storeAll(Map<String, String> maps)
+	public synchronized void storeAll(Map<String, Object> maps)
 	{
+		System.out.println("StoreAll is called ####################################");
 	}
 	public synchronized void deleteAll(Collection<String> keys)
 	{
@@ -46,9 +48,9 @@ public class UserMapStoreImpl implements MapStore<String, String>
 	{
    		return("SUCCESS");
 	}
-	public synchronized Map<String, String> loadAll(Collection<String> keys)
+	public synchronized Map<String, Object> loadAll(Collection<String> keys)
 	{
-		Map<String, String> result = new HashMap<String, String>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		return result;
 	}
 	public Iterable<String> loadAllKeys()
