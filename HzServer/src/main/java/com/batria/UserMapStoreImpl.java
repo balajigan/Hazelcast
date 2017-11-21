@@ -25,9 +25,12 @@ public class UserMapStoreImpl implements MapStore<String, Object>
         public static Session session;	
 	public UserMapStoreImpl()
 	{
-		//cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-		//session = cluster.connect("Test Cluster");
+		cluster = Cluster.builder().addContactPoint("127.0.0.1").withPort(9042).build();
+		session = cluster.connect();
 		System.out.println("Constructor called...");
+                session.execute("CREATE KEYSPACE IF NOT EXISTS eip WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1}");
+		session.execute("CREATE TABLE IF NOT EXISTS eip.user  (userId text PRIMARY KEY, userName text)");
+
 	}	
 	public synchronized void delete(String key)
 	{
@@ -36,6 +39,7 @@ public class UserMapStoreImpl implements MapStore<String, Object>
 	public synchronized void store(String key, Object obj)
 	{
                 System.out.println("Store is called $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		session.execute("INSERT INTO eip.user (userId, userName) VALUES (?,?)",key, obj.toString());
 	}
 	public synchronized void storeAll(Map<String, Object> maps)
 	{
