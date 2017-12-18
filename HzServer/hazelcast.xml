@@ -9,9 +9,10 @@
   </group>       
   
   <properties>
-      <property name="hazelcast.rest.enabled">true</property>   
+      <property name="hazelcast.rest.enabled">false</property>   
   </properties>
-  
+
+ <!-- 
   <map name="default">
       <map-store enabled="true" initial-mode="LAZY">
         <class-name>com.batria.OrderMap</class-name>
@@ -19,5 +20,6 @@
         <write-batch-size>2</write-batch-size>
         <write-coalescing>true</write-coalescing>
       </map-store>
-  </map>	
+  </map>
+-->	
 </hazelcast>
