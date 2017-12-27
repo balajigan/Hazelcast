@@ -26,7 +26,9 @@
 	  </join>
   </network>
 
-  <!-- 
+   
+  <management-center enabled="false">http://localhost:8080/mancenter</management-center>
+<!--
   <hazelcast>
 	  <license-key>Your Enterprise License Key</license-key>
   </hazelcast>
