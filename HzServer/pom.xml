@@ -7,6 +7,12 @@
   <version>1.0.0</version>
   <name>HzServer</name>
   <url>http://maven.apache.org</url>
+  <repositories>
+     <repository>
+	  <id>Hazelcast Private Release Repository</id>
+	  <url>https://repository-hazelcast-l337.forge.cloudbees.com/release/</url>
+     </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -14,16 +20,29 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!--   
     <dependency>
       <groupId>com.hazelcast</groupId>
       <artifactId>hazelcast</artifactId>
       <version>3.9</version>
     </dependency>
+-->
     <dependency>
       <groupId>com.datastax.cassandra</groupId>
       <artifactId>cassandra-driver-core</artifactId>
       <version>3.3.0</version>
-     </dependency>	  
+     </dependency>	 
+
+     <dependency>
+	     <groupId>com.hazelcast</groupId>
+	     <artifactId>hazelcast-enterprise</artifactId>
+	     <version>3.9</version>
+     </dependency>
+     <dependency>
+	     <groupId>com.hazelcast</groupId>
+	     <artifactId>hazelcast-enterprise-all</artifactId>
+	     <version>3.9</version>
+     </dependency> 
   </dependencies>
   <build>
   <plugins>
