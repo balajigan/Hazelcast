@@ -12,6 +12,20 @@
       <property name="hazelcast.rest.enabled">false</property>   
   </properties>
 
+  <network>
+	  <join>
+		  <multicast enabled="false">
+		  </multicast>
+		  <tcp-ip enabled="true">
+			  <!--
+			  <member>10.128.0.2:5701</member>
+-->
+			  <member>10.128.0.2:5702</member>
+
+		  </tcp-ip>
+	  </join>
+  </network>
+
  <!-- 
   <map name="default">
       <map-store enabled="true" initial-mode="LAZY">
