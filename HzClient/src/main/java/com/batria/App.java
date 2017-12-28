@@ -1,46 +1,84 @@
 package com.batria;
 
-/**
- * HzClient program
- *
- */
-
-//import java.util.IMap;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.batria.Order;
 
-//import com.hazelcast.config.GroupConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import java.io.IOException;
+import com.google.gson.Gson;
+import com.batria.Connection;
+import org.json.JSONObject;
+import com.batria.PopulateData;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+/**
+ * Hello world!
+ *
+ */
 public class App 
 {
+    private static Logger logger = Logger.getLogger("App");
+
     public static void main( String[] args )
     {
-        System.out.println( "HzClient started ..." );
+        System.out.println( "Application Started ... " );
+        
+	Connection conn = null;
+	int numberOfRowsPerThread = 100; //00000;
+	int numberOfThreads = 20;
+	int initialOrderId = 1000;
+        String serverIpAddress = "127.0.0.1:5701";
+	// Log4j configuration
+	PatternLayout layout = new PatternLayout();
+	String conversionPattern = "%-7p %d [%t] %c %x - %m%n";
+	layout.setConversionPattern(conversionPattern);
+
+	ConsoleAppender consoleAppender = new ConsoleAppender();
+	consoleAppender.setLayout(layout);
+        consoleAppender.activateOptions();
 	
-	ClientConfig clientConfig = new ClientConfig();
-	clientConfig.getGroupConfig().setName("HzCluster").setPassword("HzCluster");
-	clientConfig.getNetworkConfig().addAddress("10.128.0.2:5703");
+	FileAppender fileAppender = new FileAppender();
+	fileAppender.setFile("client.log");
+	fileAppender.setLayout(layout);
+	fileAppender.activateOptions();
 
-        HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+	Logger rootLogger = Logger.getRootLogger();
+	rootLogger.setLevel(Level.INFO);
+//	rootLogger.addAppender(consoleAppender);
+	rootLogger.addAppender(fileAppender);
+	logger.info("@@@@@@@@@@@@@@@@@  Application Started @@@@@@@@@@@@@@@@@@@");
 
-//        IMap<String, String> mapOrders = client.getMap("orders");
-//	mapOrders.put("1", "First Order");
-//	mapOrders.put("2", "Second Order");
+      try{
+        conn = new Connection(serverIpAddress);
+	HazelcastInstance client = conn.getClient();
 
-	IMap<String, Order> mapOrders = client.getMap("ordersObj");
-//	Order order1 = new Order();
-//	order1.setOrderId("1");
-//	order1.setOrderDesc("Sample Order using Obj");
-//	order1.setPrdId("PrdId1000");
-//	order1.setOrderQty(250);
-//	mapOrders.put("1", order1);
+	for(int threadCount = 0; threadCount < numberOfThreads; threadCount++)
+	{
+		String threadName = "Thread"+Integer.toString(threadCount);
+		int startOrderId = initialOrderId + (numberOfRowsPerThread*threadCount);
+		Thread thread1 = new Thread(new PopulateData(startOrderId ,numberOfRowsPerThread), threadName);
+		thread1.start();
+	}
 
-	Order order2 = mapOrders.get("1");
-        System.out.println("OrderDesc = " + order2.getOrderDesc());
-
-	client.shutdown();
+	//System.out.println("Exit from main");
+	logger.info("Exit from main");
+       }
+      catch(Exception ex)
+      {
+	      //System.out.println("Exception !!!");
+	      logger.error("Exception in Application");
+	      ex.printStackTrace();
+      }
+      finally
+      {
+	    //  conn.close();
+      }
     }
 }
