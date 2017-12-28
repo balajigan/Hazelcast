@@ -26,7 +26,8 @@
        </multicast>
        <tcp-ip enabled="true">		  
 	  <member>10.128.0.3:5701</member>		  
-	  <member>10.128.0.4:5701</member>			  
+	  <member>10.128.0.4:5701</member>
+          <member>10.128.0.5.5701</member>	  
        </tcp-ip>
      </join>
   </network>
