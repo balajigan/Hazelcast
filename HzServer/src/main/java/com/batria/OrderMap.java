@@ -20,13 +20,14 @@ import java.util.concurrent.ExecutionException;
 import com.batria.Connection;
 import com.hazelcast.internal.ascii.rest.RestValue;
 
-public class OrderMap implements MapStore<String, Object>
+public class OrderMap implements MapStore<String, String>
 {
 	
         public static Cluster cluster = null;
         public static Session session = null;	
 	public OrderMap()
 	{
+		System.out.println("OrderMap constructor is called %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
 //		cluster = Cluster.builder().addContactPoint("127.0.0.1").withPort(9042).build();
 //		session = cluster.connect();
 		if(session == null)
@@ -43,29 +44,39 @@ public class OrderMap implements MapStore<String, Object>
 	{
 
 	}
-	public synchronized void store(String key, Object obj)
+	public void store(String key, String obj)
 	{
-                System.out.println("Store is called $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                System.out.println("MapStore.Store is called $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println("Key = " + key);
-		RestValue obj1 = (RestValue) obj;
-		String value = new String(obj1.getValue());
-		System.out.println("Value = " + value);
-		session.execute("INSERT INTO test.orders JSON " + "'" + value + "'");
+		System.out.println("Value = " + obj);
+
+		// Don't handle the exception here. So that, we will pass on the same to caller.
+		session.execute("INSERT INTO test.orders JSON " + "'" + obj + "'");
 	}
-	public synchronized void storeAll(Map<String, Object> maps)
+	public synchronized void storeAll(Map<String, String> maps)
 	{
 		System.out.println("StoreAll is called ####################################");
 	}
 	public synchronized void deleteAll(Collection<String> keys)
 	{
 	}
-	public synchronized String load(String key)
-	{
-   		return("SUCCESS");
+	public String load(String orderId)
+	{      
+	        System.out.println("MapStore.Load method is called..");
+
+		// Don't handle the exception here. So that, we will pass on the same to caller.
+		ResultSet resultSet = session.execute("SELECT JSON * FROM test.orders WHERE order_id="+ "'"+orderId+"'");
+		String jsonString = null;
+		Row row = resultSet.one();
+		if(row != null)
+		{
+			jsonString = row.getString(0);
+		}
+   		return(jsonString);
 	}
-	public synchronized Map<String, Object> loadAll(Collection<String> keys)
+	public synchronized Map<String, String> loadAll(Collection<String> keys)
 	{
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, String> result = new HashMap<String, String>();
 		return result;
 	}
 	public Iterable<String> loadAllKeys()

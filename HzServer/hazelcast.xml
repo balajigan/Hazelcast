@@ -4,13 +4,8 @@
 	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		              xsi:schemaLocation="http://www.hazelcast.com/schema/config
 			                 http://www.hazelcast.com/schema/config/hazelcast-config-3.10.xsd">
-					 <!--
 
-<hazelcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.9.xsd"
-       xmlns="http://www.hazelcast.com/schema/config">
--->
-       <instance-name>hz-member-1</instance-name> 
+  <instance-name>hz-member-1</instance-name> 
   <group>
       <name>HzCluster1</name>
       <password>HzCluster1+</password>
@@ -19,7 +14,7 @@
   <properties>
       <property name="hazelcast.rest.enabled">false</property>   
   </properties>
-
+<!--
   <network>
      <join>
        <multicast enabled="false">
@@ -37,11 +32,11 @@
 
       <native-memory allocator-type="POOLED" enabled="true">
 	<size unit="GIGABYTES" value="16"/>
-	<!--
+	
         <min-block-size>32</min-block-size>
         <page-size>4194304</page-size>
 	<metadata-space-percentage>12.5</metadata-space-percentage>
-   -->
+   
        </native-memory>
     <map name="ordersMap">
 	<in-memory-format>NATIVE</in-memory-format>
@@ -70,11 +65,11 @@
         <data-load-timeout-seconds>900</data-load-timeout-seconds>
         <cluster-data-recovery-policy>PARTIAL_RECOVERY_MOST_COMPLETE</cluster-data-recovery-policy>
     </hot-restart-persistence>
-
+    -->
     <!--
 
    https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.xml
-
+-->
   <map name="default">
       <map-store enabled="true" initial-mode="LAZY">
         <class-name>com.batria.OrderMap</class-name>
@@ -83,5 +78,5 @@
         <write-coalescing>true</write-coalescing>
       </map-store>
   </map>
--->	
+
 </hazelcast>
