@@ -24,21 +24,16 @@ public class OrderMap implements MapStore<String, String>
 {
 	
         public static Cluster cluster = null;
-        public static Session session = null;	
+        public static Session session = null;
+	private String serverIp="127.0.0.1";	
 	public OrderMap()
 	{
-		System.out.println("OrderMap constructor is called %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
-//		cluster = Cluster.builder().addContactPoint("127.0.0.1").withPort(9042).build();
-//		session = cluster.connect();
 		if(session == null)
 		{
-			Connection conn = new Connection();
+			Connection conn = new Connection(serverIp);
 			session = conn.getSession();
 		}
 		System.out.println("Constructor called...");
-                //session.execute("CREATE KEYSPACE IF NOT EXISTS eip WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1}");
-		//session.execute("CREATE TABLE IF NOT EXISTS eip.user  (userId text PRIMARY KEY, userName text)");
-
 	}	
 	public synchronized void delete(String key)
 	{

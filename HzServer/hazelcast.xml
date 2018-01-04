@@ -73,7 +73,7 @@
   <map name="default">
       <map-store enabled="true" initial-mode="LAZY">
         <class-name>com.batria.OrderMap</class-name>
-        <write-delay-seconds>5</write-delay-seconds>
+        <write-delay-seconds>0</write-delay-seconds>
         <write-batch-size>2</write-batch-size>
         <write-coalescing>true</write-coalescing>
       </map-store>
