@@ -25,7 +25,7 @@ public class OrderMap implements MapStore<String, String>
 	
         public static Cluster cluster = null;
         public static Session session = null;
-	private String serverIp="127.0.0.1";	
+	private String serverIp="10.128.0.8";	
 	public OrderMap()
 	{
 		if(session == null)
