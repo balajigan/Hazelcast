@@ -31,7 +31,7 @@
 	  <license-key></license-key>
 
       <native-memory allocator-type="POOLED" enabled="true">
-	<size unit="GIGABYTES" value="16"/>
+	<size unit="GIGABYTES" value="8"/>
 	
         <min-block-size>32</min-block-size>
         <page-size>4194304</page-size>
