@@ -26,13 +26,14 @@
       <artifactId>cassandra-driver-core</artifactId>
       <version>3.3.0</version>
      </dependency>
-
+<!--
      <dependency>
 	  <groupId>com.hazelcast</groupId>
 	  <artifactId>hazelcast</artifactId>
 	  <version>3.9</version>
-      </dependency>	   
-<!--
+      </dependency>
+-->	   
+
      <dependency>
 	     <groupId>com.hazelcast</groupId>
 	     <artifactId>hazelcast-enterprise</artifactId>
@@ -43,7 +44,7 @@
 	     <artifactId>hazelcast-enterprise-all</artifactId>
 	     <version>3.9</version>
      </dependency> 
--->     
+     
   </dependencies>
   <build>
   <plugins>

@@ -41,23 +41,28 @@ public class OrderMap implements MapStore<String, String>
 	}
 	public void store(String key, String obj)
 	{
-                System.out.println("MapStore.Store is called $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println("Key = " + key);
-		System.out.println("Value = " + obj);
+                //System.out.println("MapStore.Store is called $$$$$$$$$$");
+		//System.out.println("Key = " + key);
+		//System.out.println("Value = " + obj);
 
 		// Don't handle the exception here. So that, we will pass on the same to caller.
 		session.execute("INSERT INTO test.orders JSON " + "'" + obj + "'");
 	}
-	public synchronized void storeAll(Map<String, String> maps)
+	public void storeAll(Map<String, String> maps)
 	{
-		System.out.println("StoreAll is called ####################################");
+		System.out.println("StoreAll records = " + maps.size());
+		for (Map.Entry<String, String> entry : maps.entrySet()) 
+		{
+			//System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+			session.execute("INSERT INTO test.orders JSON " + "'" + entry.getValue() + "'");
+		}
 	}
 	public synchronized void deleteAll(Collection<String> keys)
 	{
 	}
 	public String load(String orderId)
 	{      
-	        System.out.println("MapStore.Load method is called..");
+	        //System.out.println("MapStore.Load method is called..");
 
 		// Don't handle the exception here. So that, we will pass on the same to caller.
 		ResultSet resultSet = session.execute("SELECT JSON * FROM test.orders WHERE order_id="+ "'"+orderId+"'");

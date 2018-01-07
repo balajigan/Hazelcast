@@ -14,7 +14,7 @@
   <properties>
       <property name="hazelcast.rest.enabled">false</property>   
   </properties>
-<!--
+
   <network>
      <join>
        <multicast enabled="false">
@@ -65,7 +65,7 @@
         <data-load-timeout-seconds>900</data-load-timeout-seconds>
         <cluster-data-recovery-policy>PARTIAL_RECOVERY_MOST_COMPLETE</cluster-data-recovery-policy>
     </hot-restart-persistence>
-    -->
+    
     <!--
 
    https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.xml
@@ -73,8 +73,8 @@
   <map name="default">
       <map-store enabled="true" initial-mode="LAZY">
         <class-name>com.batria.OrderMap</class-name>
-        <write-delay-seconds>0</write-delay-seconds>
-        <write-batch-size>2</write-batch-size>
+        <write-delay-seconds>5</write-delay-seconds>
+        <write-batch-size>50</write-batch-size>
         <write-coalescing>true</write-coalescing>
       </map-store>
   </map>
