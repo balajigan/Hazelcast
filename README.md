@@ -1,6 +1,6 @@
 
 # Hazelcast
-## Installing and starting Hazelcast server
+## Installing and starting Hazelcast server.
 
 git clone https://github.com/balajigan/Hazelcast.git
 
