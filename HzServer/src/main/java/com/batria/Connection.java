@@ -9,7 +9,7 @@ public class Connection
 {
 	public static Cluster cluster;
 	public static Session session;
-	private String serverIp = "127.0.0.1";
+	private String serverIp = "10.128.0.8";
 	public Connection()
 	{
 
